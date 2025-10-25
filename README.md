@@ -5,7 +5,6 @@ Mobile-API for [AdGuard VPN](https://play.google.com/store/apps/details?id=com.a
 ```cs
 using System;
 using AdGuardVpnApi;
-using System.Threading.Tasks;
 
 namespace Application
 {

@@ -22,6 +22,7 @@ namespace AdGuardVpnApi
                 new MediaTypeWithQualityHeaderValue("application/json"));
             applicationId = GenerateApplicationId(16);
         }
+        
         private string GenerateApplicationId(int length)
         {
             const string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

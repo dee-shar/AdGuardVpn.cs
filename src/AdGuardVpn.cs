@@ -1,10 +1,9 @@
 using System;
+using System.Text;
+using System.Text.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace AdGuardVpnApi
 {
@@ -40,7 +39,6 @@ namespace AdGuardVpnApi
             var data = new StringContent(
                 $"request_id=adguard-android&email={email}", Encoding.UTF8, "application/x-www-form-urlencoded");
             var response = await httpClient.PostAsync($"{authApiUrl}/api/1.0/user_lookup", data);
-            response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
 
@@ -50,7 +48,6 @@ namespace AdGuardVpnApi
                 $"password={password}&product=VPN&clientId=adguard-vpn-android&marketingConsent=false&source=VPN_APPLICATION&applicationId={applicationId}&email={email}",
                 Encoding.UTF8, "application/x-www-form-urlencoded");
             var response = await httpClient.PostAsync($"{authApiUrl}/api/2.0/registration", data);
-            response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
 
@@ -71,7 +68,8 @@ namespace AdGuardVpnApi
                 }
                 return responseContent;
             }
-            catch (Exception exception) {
+            catch (Exception exception)
+            {
                 return exception.Message;
             }
         }
@@ -79,28 +77,24 @@ namespace AdGuardVpnApi
         public async Task<string> GetAccountSettings()
         {
             var response = await httpClient.GetAsync($"{apiUrl}/account/api/1.0/account/settings");
-            response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
 
         public async Task<string> GetLicenses()
         {
             var response = await httpClient.GetAsync($"{apiUrl}/account/api/1.0/products/licenses/vpn.json");
-            response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
 
         public async Task<string> GetExclusionServices()
         {
             var response = await httpClient.GetAsync($"{apiUrl}/api/v1/exclusion_services");
-            response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
 
         public async Task<string> GetBonuses()
         {
             var response = await httpClient.GetAsync($"{apiUrl}/account/api/1.0/vpn/bonuses");
-            response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
 
@@ -108,14 +102,12 @@ namespace AdGuardVpnApi
         {
             var response = await httpClient.GetAsync(
                 $"{apiUrl}/api/v2/locations/ANDROID?app_id={applicationId}&token={accessToken}");
-            response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
 
         public async Task<string> VerifyUrl(string verificationUrl)
         {
             var response = await httpClient.GetAsync(verificationUrl);
-            response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
     }

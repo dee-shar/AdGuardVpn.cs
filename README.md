@@ -3,7 +3,6 @@ Mobile-API for [AdGuard VPN](https://play.google.com/store/apps/details?id=com.a
 
 ## Example
 ```cs
-using System;
 using AdGuardVpnApi;
 
 namespace Application
